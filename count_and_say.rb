@@ -1,3 +1,15 @@
+# ++
+# The count-and-say sequence is the sequence of integers beginning as follows:
+# 1, 11, 21, 1211, 111221, ...
+#
+# 1 is read off as "one 1" or 11.
+# 11 is read off as "two 1s" or 21.
+# 21 is read off as "one 2, then one 1" or 1211.
+# Given an integer n, generate the nth sequence.
+#
+# Note: The sequence of integers will be represented as a string.
+#
+# ++
 class Solution
   def self.count_and_say(n)
     i = 0
@@ -35,14 +47,3 @@ class Solution
     return ret
   end
 end
-
-puts Solution.count_and_say(1)
-#Solution.say("1")
-
-__END__
-f(1) = 1
-f(2) = count(f(1)) = 1 * 1
-f(3) = count(f(2)) = 2 * 1
-f(4) = 
-f(n) = count(f(n-2)) = 1 * 2 + 1 * 1
-
