@@ -12,14 +12,13 @@
 # ++
 
 module CountAndSay
-  SAY_ARRAY = []
+  SAY_ARRAY = ['11']
   def count_and_say(n)
-    puts say_number(n)
+    say_number(n)
   end
 
   def say_number(n)
     return SAY_ARRAY[n] if SAY_ARRAY[n]
-    # str = SAY_ARRAY.last unless SAY_ARRAY[n]
     str = '1'
     n.times do |pointer|
       str = count_number(str)
@@ -30,35 +29,21 @@ module CountAndSay
 
   def count_number(str)
     out_str = ''
-    return "11" if str == '1'
-    str_array = str.split(//)
-    n = 0
-    count = 1
-    value = str_array[n]
-    (str_array.length-1).times do
-      if str_array[n] == str_array[n+1]
+    count = 0
+    value = str[0]
+    str.each_char do |c|
+      if value == c
         count = count + 1
       else
         out_str << "#{count}#{value}"
         count = 1
-        value = str_array[n+1]
+        value = c
       end
-      n = n + 1
     end
     out_str << "#{count}#{value}"
-    out_str
   end
-
-  private
-
 end
 
 class Solution
   include CountAndSay
 end
-
-# Output examples
-# s = Solution.new
-# 6.times do |n|
-#   s.count_and_say(n)
-# end
