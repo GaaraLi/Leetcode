@@ -1,25 +1,27 @@
 require_relative 'count_and_say'
+require 'pry'
 
 describe CountAndSay do
   before do
     @s = Solution.new
-    @hash_record = {}
-    @hash_record["0"] = 0
-    @hash_record["1"] = 1
-    @hash_record["2"] = 2
-    @number = 122333
+    # @number = 1
   end
-  it "should count the number in the str" do
-    expect(@s.count_number('122333')["1"]).to equal(1)
-    expect(@s.count_number('122333')["2"]).to equal(2)
-    expect(@s.count_number('122333')["3"]).to equal(3)
+  it "should be right when the str started from 1 or bigger" do
+    expect(@s.count_number('1')).to eq('11')
+    expect(@s.count_number('11')).to eq('21')
+    expect(@s.count_number('21')).to eq('1211')
   end
 
-  it "shuld say the right result" do
-    expect(@s.say_number(@hash_record)).to eq("1122")
+  it "should return when the say_array have the result" do
+    CountAndSay::SAY_ARRAY[4] = '1111'
+    expect(@s.say_number(4)).to eq('1111')
   end
 
-  it "should out put the right result" do
-    expect(@s.count_and_say(@number)).to eq("112233")
+  it "should return the right number when SAY_ARRAY did not have the result" do
+    expect(@s.say_number(3)).to eq('1211')
+  end
+
+  it 'should output the right result' do
+    expect(@s.count_and_say(3)).to eq('1211')
   end
 end  

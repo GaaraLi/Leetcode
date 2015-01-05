@@ -11,30 +11,54 @@
 #
 # ++
 
-module CountAndSay  
+module CountAndSay
+  SAY_ARRAY = []
   def count_and_say(n)
-    str = n.to_s
-    say_number(count_number(str))
+    puts say_number(n)
   end
 
-  def count_number(str)
-    count_record =  {}
-    0.upto(9) do |n|
-      count_record[n.to_s] = str.count(n.to_s)
-    end
-    count_record
-  end
-
-  def say_number(record_hash)
-    str = ''
-    record_hash.delete_if{|k,v| v == 0}
-    record_hash.each do |k,v|
-      str << "#{v}#{k}"
+  def say_number(n)
+    return SAY_ARRAY[n] if SAY_ARRAY[n]
+    # str = SAY_ARRAY.last unless SAY_ARRAY[n]
+    str = '1'
+    n.times do |pointer|
+      str = count_number(str)
+      SAY_ARRAY[pointer] = str unless SAY_ARRAY[pointer]
     end
     str
   end
+
+  def count_number(str)
+    out_str = ''
+    return "11" if str == '1'
+    str_array = str.split(//)
+    n = 0
+    count = 1
+    value = str_array[n]
+    (str_array.length-1).times do
+      if str_array[n] == str_array[n+1]
+        count = count + 1
+      else
+        out_str << "#{count}#{value}"
+        count = 1
+        value = str_array[n+1]
+      end
+      n = n + 1
+    end
+    out_str << "#{count}#{value}"
+    out_str
+  end
+
+  private
+
 end
 
 class Solution
   include CountAndSay
 end
+
+# Output examples
+# s = Solution.new
+# 6.times do |n|
+#   s.count_and_say(n)
+# end
